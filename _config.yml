@@ -97,7 +97,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: hexo-theme-next-7.8.0
+# theme: landscape
+# theme: Hermes
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
