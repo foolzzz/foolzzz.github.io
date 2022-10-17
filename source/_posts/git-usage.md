@@ -30,18 +30,12 @@ git cherry-pick <HashA> <HashB>
 git cherry-pick A..B # 不含A
 git cherry-pick A^..B # 含A
 ```
-
-
 ## rebase
-> https://www.jianshu.com/p/4a8f4af4e803
 
 ```sh
 git rebase [startpoint] [endpoint] --onto [branchname]
 ```
 
-
-
-
-
 # Ref
-rebase https://zhuanlan.zhihu.com/p/75499871
+https://zhuanlan.zhihu.com/p/75499871
+https://www.jianshu.com/p/4a8f4af4e803
