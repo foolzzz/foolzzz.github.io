@@ -176,7 +176,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-21 15:41:01" itemprop="dateModified" datetime="2022-10-21T15:41:01+08:00">2022-10-21</time>
+                <time title="Modified: 2022-10-22 15:23:09" itemprop="dateModified" datetime="2022-10-22T15:23:09+08:00">2022-10-22</time>
               </span>
 
           
@@ -190,7 +190,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="c-11"><a href="#c-11" class="headerlink" title="c++11"></a>c++11</h3><p>通过内存模型、线程、原子操作等来支持本地并行编程(Native Concurrency)。<br>通过统一初始化表达式、auto、declytype、移动语义等来统一对泛型编程的支持。<br>通过 constexpr、POD(概念)等更好地支持系统编程。<br>通过内联命名空间、继承构造函数和右值引用等，以更好地支持库的构建。</p>
+          <h2 id="2-保证稳定性与兼容性"><a href="#2-保证稳定性与兼容性" class="headerlink" title="2. 保证稳定性与兼容性"></a>2. 保证稳定性与兼容性</h2><h3 id="c-11"><a href="#c-11" class="headerlink" title="c++11"></a>c++11</h3><p>通过内存模型、线程、原子操作等来支持本地并行编程(Native Concurrency)。<br>通过统一初始化表达式、auto、declytype、移动语义等来统一对泛型编程的支持。<br>通过 constexpr、POD(概念)等更好地支持系统编程。<br>通过内联命名空间、继承构造函数和右值引用等，以更好地支持库的构建。</p>
 <h3 id="Pragma"><a href="#Pragma" class="headerlink" title="_Pragma"></a>_Pragma</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">_Pragma</span>(<span class="string">&quot;once)</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="变长参数定义以及-VA-ARGS"><a href="#变长参数定义以及-VA-ARGS" class="headerlink" title="变长参数定义以及__VA_ARGS_"></a>变长参数定义以及__VA_ARGS_</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PR(...) printf(__VA_ARGS__) </span></span><br></pre></td></tr></table></figure>
@@ -222,7 +222,9 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">People</span> &#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> hand;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="built_in">sizeof</span>(People::hand) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
+<h3 id="2-9-friend"><a href="#2-9-friend" class="headerlink" title="2.9 friend"></a>2.9 friend</h3><h3 id="2-10-final-x2F-override"><a href="#2-10-final-x2F-override" class="headerlink" title="2.10 final&#x2F;override"></a>2.10 final&#x2F;override</h3><p><code>final</code>关键字使派生类不可覆盖它所修饰的虚函数.</p>
+<p>如果派生类的虚函数声明时, 使用了<code>override</code>描述符, 那么该函数必须重载其基类中的同名函数，否则代码将无法通过编译。</p>
+<h3 id="2-11-模板函数的默认模板参数"><a href="#2-11-模板函数的默认模板参数" class="headerlink" title="2.11 模板函数的默认模板参数"></a>2.11 模板函数的默认模板参数</h3><h3 id="2-12-外部模板"><a href="#2-12-外部模板" class="headerlink" title="2.12 外部模板"></a>2.12 外部模板</h3><h3 id="2-13-局部和匿名类型作模板实参"><a href="#2-13-局部和匿名类型作模板实参" class="headerlink" title="2.13 局部和匿名类型作模板实参"></a>2.13 局部和匿名类型作模板实参</h3><h2 id="3-通用为本-专用为末"><a href="#3-通用为本-专用为末" class="headerlink" title="3 通用为本, 专用为末"></a>3 通用为本, 专用为末</h2><h2 id="4-新手易学，老兵易用"><a href="#4-新手易学，老兵易用" class="headerlink" title="4 新手易学，老兵易用"></a>4 新手易学，老兵易用</h2><h2 id="5-提高类型安全"><a href="#5-提高类型安全" class="headerlink" title="5 提高类型安全"></a>5 提高类型安全</h2><h2 id="6-提高性能及操作硬件的能力"><a href="#6-提高性能及操作硬件的能力" class="headerlink" title="6 提高性能及操作硬件的能力"></a>6 提高性能及操作硬件的能力</h2><h2 id="7-为改变思考方式而改变"><a href="#7-为改变思考方式而改变" class="headerlink" title="7 为改变思考方式而改变"></a>7 为改变思考方式而改变</h2><h2 id="8-融入实际应用"><a href="#8-融入实际应用" class="headerlink" title="8 融入实际应用"></a>8 融入实际应用</h2>
       
     </div>
 
