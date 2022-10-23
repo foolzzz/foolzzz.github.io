@@ -115,8 +115,160 @@ int main() {
 
 ### 2.13 局部和匿名类型作模板实参
 
-
 ## 3 通用为本, 专用为末
+### 3.1 继承构造函数
+
+子类可以通过使用using声明来声明继承基类的构造函数.
+
+```c++
+#include <iostream>
+using namespace std;
+
+struct A {
+  A(int i) {}
+}
+
+struct B : A {
+  using A::A;
+
+  int d {0};
+}
+
+int main() {
+  B b(365);
+}
+```
+
+### 3.2 委派构造函数
+
+在C++11中，委派构造函数，就是指委派函数将构造的任务委派给了目标构造函数来完成的这样一种类构造的方式.
+```c++
+class Info {
+public:
+  Info() : Info(1, 'a') {}
+  Info(int i) : Info(i, 'a') {}
+  Info(char e) : Info(1, e) {}
+
+private:
+  Info(int i, char e): type(i), name(e) {}
+  int type;
+  char name;
+}
+```
+
+### 3.3 右值引用；移动语义和完美转发
+
+3.3.1 指针成员与拷贝构造
+涉及到指针要使用深拷贝.
+
+3.3.2 移动语义
+移动构造函数
+
+```c++
+#include <iostream>
+using namespace std;
+
+class HasPtrMem {
+public:
+  HasPtrMem():d(new int(3)) {}
+  HasPtrMem(const HasPtrMem &h):d(new int(*h.d)) {}
+
+  HasPtrMem(HasPtrMem && h) : d(h.d) { // 移动构造函数
+    h.d = nullptr;
+  }
+
+  ~HasPtrMem() {
+    delete d;
+  }
+
+  int *d
+}
+```
+
+3.3.3 左值\右值 与 右值引用
+
+可以取地址的、有名字的就是左值.
+不可以取地址的，没有名字的就是右值.
+
+c++11 中, 右值分为两种, 将亡值(xvalue, eXpiring Value), 纯右值(prvalue, Pure Rvalue)
+
+```c++
+T && a = ReturnRvalue();
+T b = ReturnRvalue();
+```
+右值引用是不能绑定到任何左值的
+```c++
+int c;
+int && d = c; // X 编译失败
+```
+
+出现这样的状况的原因是，在常量左值引用在 C++98 标准中开始就是个“万能”的引用 类型。它可以接受非常量左值、常量左值、右值对其进行初始化。而且在使用右值对其初始 化的时候，常量左值引用还可以像右值引用一样将右值的生命期延长。不过相比于右值引用 所引用的右值，常量左值所引用的右值在它的“余生”中只能是只读的。相对地，非常量左 值只能接受非常量左值对其进行初始化。
+
+```c++
+const bool & judge = true;
+const bool judge2 = true;
+```
+
+常量左值引用可以减少对象开销.
+
+
+3.3.4 std::move 强制转化为右值
+
+
+3.3.5 移动语义的一些其他问题
+move_if_noexcept(x)
+如果x是noexcept的, 则为move语义，否则为copy语义.
+
+3.3.6 完美转发 P85
+
+```c++
+void IrunCodeActually(int t) {}
+
+template <typename T>
+void IamForwarding(T && t) {
+  IrunCodeActually(static_cast<T &&>(t));
+}
+```
+
+
+```c++
+#include <iostream>
+using namespace std;
+
+void RunCode(int && m) {}
+void RunCode(int & m) {}
+void RunCode(const int && m) {}
+void RunCode(const int & m) {}
+
+template <typename T>
+void PerfectForward(T && t) { RunCode(forward<T>(t)); }
+
+int main() {
+  int a = 1;
+  int b = 2;
+  const int c = 3;
+  const int d = 4;
+
+  PerfectForward(a);
+  PerfectForward(move(b));
+  PerfectForward(c);
+  PerfectForward(move(d));
+}
+```
+
+
+3.4 显示转换操作符
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## 4 新手易学，老兵易用
