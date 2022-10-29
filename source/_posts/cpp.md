@@ -273,18 +273,73 @@ initializer_list<int>;
 3.5.2 防止类型收窄
 C++11 使用列表初始化可以防范类型收窄, 也能够加强类型使用的安全性.
 
-3.6 POD类型
+3.6 POD类型 P105
+
+3.7 非受限联合体
+
+3.8 用户自定义字面量
+
+3.9 内联名字空间
+`inline namespace`
+
+3.10 模板的别名
+```c++
+typedef std::vector<std::string> strvec;
 
 
+// c++11
+using uint = unsigned int;
+typedef unsigned int UINT;
+using sint = int;
+
+template<typename T> 
+using MapString = std::map<T, char *>;
 
 
+MapString<int> numberedString;
+```
 
+3.11 一般化的SFINEA规则
+模板推导
+```c++
+#include <iostream>
 
+struct Test {
+  typedef int foo;
+}
 
+template <typename T>
+void f(typename T::foo) {
 
+}
 
+template <typename T>
+void f(T) {
+
+}
+
+int main() {
+  f<Test>(10); // #1
+  f<int>(10); // #2
+}
+```
 
 ## 4 新手易学，老兵易用
+4.1 右尖括号>的改进
+
+4.2 auto类型推导
+
+4.3 decltype
+
+4.4 追踪返回类型
+```c++
+template<typename T1, typename T2>
+auto Sum(T1 & t1, T2 & t2) -> decltype(t1 + t2) {
+  return t1 + t2;
+}
+```
+
+
 
 ## 5 提高类型安全
 
