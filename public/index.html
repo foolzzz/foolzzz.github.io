@@ -298,7 +298,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-25 23:37:45" itemprop="dateModified" datetime="2022-10-25T23:37:45+08:00">2022-10-25</time>
+                <time title="Modified: 2022-10-30 13:39:27" itemprop="dateModified" datetime="2022-10-30T13:39:27+08:00">2022-10-30</time>
               </span>
 
           
@@ -381,8 +381,32 @@
 <p>3.5 列表初始化<br>3.5.1 初始化列表</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map&lt;<span class="type">int</span>, <span class="type">float</span>&gt; m = &#123;&#123;<span class="number">1</span>, <span class="number">1.0f</span>&#125;, &#123;<span class="number">2</span>, <span class="number">2.1f</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">initializer_list&lt;<span class="type">int</span>&gt;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>3.5.2 防止类型收窄<br>C++11 使用列表初始化可以防范类型收窄, 也能够加强类型使用的安全性.</p>
-<p>3.6 POD类型</p>
-<h2 id="4-新手易学，老兵易用"><a href="#4-新手易学，老兵易用" class="headerlink" title="4 新手易学，老兵易用"></a>4 新手易学，老兵易用</h2><h2 id="5-提高类型安全"><a href="#5-提高类型安全" class="headerlink" title="5 提高类型安全"></a>5 提高类型安全</h2><h2 id="6-提高性能及操作硬件的能力"><a href="#6-提高性能及操作硬件的能力" class="headerlink" title="6 提高性能及操作硬件的能力"></a>6 提高性能及操作硬件的能力</h2><h2 id="7-为改变思考方式而改变"><a href="#7-为改变思考方式而改变" class="headerlink" title="7 为改变思考方式而改变"></a>7 为改变思考方式而改变</h2><h2 id="8-融入实际应用"><a href="#8-融入实际应用" class="headerlink" title="8 融入实际应用"></a>8 融入实际应用</h2>
+<p>3.6 POD类型 P105</p>
+<p>3.7 非受限联合体</p>
+<p>3.8 用户自定义字面量</p>
+<p>3.9 内联名字空间<br><code>inline namespace</code></p>
+<p>3.10 模板的别名</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> std::vector&lt;std::string&gt; strvec;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// c++11</span></span><br><span class="line"><span class="keyword">using</span> uint = <span class="type">unsigned</span> <span class="type">int</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> UINT;</span><br><span class="line"><span class="keyword">using</span> sint = <span class="type">int</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="keyword">using</span> MapString = std::map&lt;T, <span class="type">char</span> *&gt;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MapString&lt;<span class="type">int</span>&gt; numberedString;</span><br></pre></td></tr></table></figure>
+
+<p>3.11 一般化的SFINEA规则<br>模板推导</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> foo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="keyword">typename</span> T::foo)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">f</span>&lt;Test&gt;(<span class="number">10</span>); <span class="comment">// #1</span></span><br><span class="line">  <span class="built_in">f</span>&lt;<span class="type">int</span>&gt;(<span class="number">10</span>); <span class="comment">// #2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-新手易学，老兵易用"><a href="#4-新手易学，老兵易用" class="headerlink" title="4 新手易学，老兵易用"></a>4 新手易学，老兵易用</h2><p>4.1 右尖括号&gt;的改进</p>
+<p>4.2 auto类型推导</p>
+<p>4.3 decltype</p>
+<p>4.4 追踪返回类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">Sum</span><span class="params">(T1 &amp; t1, T2 &amp; t2)</span> -&gt; <span class="title">decltype</span><span class="params">(t1 + t2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> t1 + t2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.4.2 使用追踪返回类型的函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">char</span> *a, <span class="type">int</span> b)</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-提高类型安全"><a href="#5-提高类型安全" class="headerlink" title="5 提高类型安全"></a>5 提高类型安全</h2><p>5.1 强类型枚举</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">Type</span> &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="6-提高性能及操作硬件的能力"><a href="#6-提高性能及操作硬件的能力" class="headerlink" title="6 提高性能及操作硬件的能力"></a>6 提高性能及操作硬件的能力</h2><h2 id="7-为改变思考方式而改变"><a href="#7-为改变思考方式而改变" class="headerlink" title="7 为改变思考方式而改变"></a>7 为改变思考方式而改变</h2><h2 id="8-融入实际应用"><a href="#8-融入实际应用" class="headerlink" title="8 融入实际应用"></a>8 融入实际应用</h2>
       
     </div>
 

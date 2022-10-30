@@ -339,12 +339,68 @@ auto Sum(T1 & t1, T2 & t2) -> decltype(t1 + t2) {
 }
 ```
 
+4.4.2 使用追踪返回类型的函数
+
+```c++
+int func(char *a, int b)
+```
+
 
 
 ## 5 提高类型安全
 
+5.1 强类型枚举
+```c++
+enum class Type {};
+```
+
+5.2 堆内存管理：智能指针与垃圾回收
+unique_ptr, shared_ptr, weak_ptr
+
 ## 6 提高性能及操作硬件的能力
+
+6.1 常量表达式
+
+变长参数
+```c++
+pair<int, double>;
+
+std::tuple<double, char, std::string> collections;
+```
+变长模板
+
+```c++
+template <typeame... Elements> class tuple;
+
+tuple<int, char, double>;
+```
+
+6.3 原子类型与原子操作 P196
+```c++
+atomic_llong
+```
 
 ## 7 为改变思考方式而改变
 
+7.2 默认函数的控制 P227
+
+
+7.3 lambda函数 P234
+
+```c++
+[capture](parameters) mutable -> return-type { statement }
+
+[]{}
+```
+捕捉列表
+- `[var]` 值传递
+- `[=]` 值传递方式捕捉所有父作用于的变量
+- `[&var]` 引用传递
+- `[&]` 引用传递捕捉父作用于的变脸
+- `this` 表示值传递的方式捕捉当前的this指针
+
 ## 8 融入实际应用
+
+8.1 对齐 P258
+
+8.2 通用属性
