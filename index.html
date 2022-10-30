@@ -298,7 +298,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-29 23:28:24" itemprop="dateModified" datetime="2022-10-29T23:28:24+08:00">2022-10-29</time>
+                <time title="Modified: 2022-10-30 13:39:27" itemprop="dateModified" datetime="2022-10-30T13:39:27+08:00">2022-10-30</time>
               </span>
 
           
@@ -397,9 +397,16 @@
 <p>4.4 追踪返回类型</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">Sum</span><span class="params">(T1 &amp; t1, T2 &amp; t2)</span> -&gt; <span class="title">decltype</span><span class="params">(t1 + t2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> t1 + t2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>4.4.2 使用追踪返回类型的函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">char</span> *a, <span class="type">int</span> b)</span></span></span><br></pre></td></tr></table></figure>
 
 
-<h2 id="5-提高类型安全"><a href="#5-提高类型安全" class="headerlink" title="5 提高类型安全"></a>5 提高类型安全</h2><h2 id="6-提高性能及操作硬件的能力"><a href="#6-提高性能及操作硬件的能力" class="headerlink" title="6 提高性能及操作硬件的能力"></a>6 提高性能及操作硬件的能力</h2><h2 id="7-为改变思考方式而改变"><a href="#7-为改变思考方式而改变" class="headerlink" title="7 为改变思考方式而改变"></a>7 为改变思考方式而改变</h2><h2 id="8-融入实际应用"><a href="#8-融入实际应用" class="headerlink" title="8 融入实际应用"></a>8 融入实际应用</h2>
+
+<h2 id="5-提高类型安全"><a href="#5-提高类型安全" class="headerlink" title="5 提高类型安全"></a>5 提高类型安全</h2><p>5.1 强类型枚举</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">Type</span> &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="6-提高性能及操作硬件的能力"><a href="#6-提高性能及操作硬件的能力" class="headerlink" title="6 提高性能及操作硬件的能力"></a>6 提高性能及操作硬件的能力</h2><h2 id="7-为改变思考方式而改变"><a href="#7-为改变思考方式而改变" class="headerlink" title="7 为改变思考方式而改变"></a>7 为改变思考方式而改变</h2><h2 id="8-融入实际应用"><a href="#8-融入实际应用" class="headerlink" title="8 融入实际应用"></a>8 融入实际应用</h2>
       
     </div>
 
