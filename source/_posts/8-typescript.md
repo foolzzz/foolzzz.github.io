@@ -252,9 +252,165 @@ drummer.instrument = "Drums";
 
 
 
+interface IParent1 {
+  v1: number
+}
+interface Iparent2 {
+  v2: number
+}
+
+interface Child extends IParent1, IParent2 { }
+var Iobj:Child = {v1:12, v2:23}
 ```
 
+## 类
+```ts
+class Car {
+  engine:string;
 
+  constructor(engine:string) {
+    this.engine = engine;
+  }
+
+  disp():void {
+    console.log("engine: " + this.engine);
+  }
+}
+
+var obj = new Car("BMW");
+
+obj.disp();
+
+// 类继承
+class Shape {
+  Area:number
+
+  constructor(a:number) {
+    this.Area = a;
+  }
+}
+
+class Circle extends Shape {
+  disp():void {
+    console.log("Circle Area: " + this.Area);
+  }
+}
+
+var obj = new Circle(223);
+obj.disp();
+
+// ts 不支持多继承
+
+// 支持方法重写，调用父类用super
+
+
+// static用于定义类的数据成员(属性/方法)
+class StaticMem {
+  static num:number
+
+  static disp():void {
+    console.log("Num: " + StaticMem.num);
+  }
+}
+
+
+// instanceof
+class Person {}
+var obj = new Person()
+var isPerson = obj instanceof Person;
+console.log("是吗?" + isPerson);
+
+
+// 访问控制符
+//  public/protected/private
+class Encapsulate {
+  str1:string = "hello";
+  private str2:string = "world"
+}
+
+// var obj = new Encapsulate();
+```
+
+类和接口
+```ts
+interface ILoan {
+  interest: number
+}
+
+class AgriLoan implemnts ILoan {
+  interest: number
+  rebate: number
+
+  constructor(interest:number,rebate:number) {
+    this.interest=interest
+    this.rebate=rebate
+  }
+}
+
+```
+
+## 对象
+
+```ts
+var obj = {
+  key1:"value1",
+  key3: function() {
+
+  },
+  key4:["a"]
+}
+
+// Duck Typing
+
+interface IPoint {
+  x:number
+  y:number
+}
+
+function addPoints(p1:IPoint, p2:IPoint):IPoint {
+  var x = p1.x + p2.x
+  var y = p1.y + p2.y
+  return {x:x, y:y}
+}
+
+```
+
+## Typescript namespace
+
+```ts
+namespace nsa {
+  export interface ISomeInterfaceName { }
+  export class SomeClassName { }
+}
+
+nsa.SomeClassName
+
+// 如果命名空间在一个单独ts文件中，可以使用///引用他
+/// <reference path="SomeFileName.ts">
+
+```
+
+## Typescript module
+
+```ts
+export interface SomeInterface {
+
+}
+```
+
+```ts
+import someInterfaceRef = require("./SomeInterface");
+```
+
+## 声明文件
+
+xx.d.ts
+
+```ts
+declare var jQuery: (selector: string) => any;
+
+jQuery("#foo");
+```
 
 ## ref
-https://www.runoob.com/typescript/ts-interface.html
+菜鸟教程 https://www.runoob.com/typescript/ts-interface.html
