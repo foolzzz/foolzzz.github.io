@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="[TOC] 3.init进程4. JNI与NDK4.1 Android 与 JNI4.2 JNI的基本原理4.3 调用JNI函数4.4 在C程序中运行Java类4.5 直接注册JNI本地函数4.6 使用Android NDK开发 5. Zygote P1375.1 Zygote是什么5.2 由app_process运行ZygoteInit class Zygote由Java编写, 不能直接由ini">
+  <meta name="description" content="docker exec -it name &#x2F;bin&#x2F;bash">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android">
-<meta property="og:url" content="http://example.com/2022/10/30/6-android/index.html">
+<meta property="og:title" content="docker基本操作">
+<meta property="og:url" content="http://example.com/2022/11/05/11-docker/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[TOC] 3.init进程4. JNI与NDK4.1 Android 与 JNI4.2 JNI的基本原理4.3 调用JNI函数4.4 在C程序中运行Java类4.5 直接注册JNI本地函数4.6 使用Android NDK开发 5. Zygote P1375.1 Zygote是什么5.2 由app_process运行ZygoteInit class Zygote由Java编写, 不能直接由ini">
+<meta property="og:description" content="docker exec -it name &#x2F;bin&#x2F;bash">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-30T08:54:12.000Z">
-<meta property="article:modified_time" content="2022-11-05T10:11:59.119Z">
+<meta property="article:published_time" content="2022-11-05T10:16:54.000Z">
+<meta property="article:modified_time" content="2022-11-05T10:17:46.338Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2022/10/30/6-android/">
+<link rel="canonical" href="http://example.com/2022/11/05/11-docker/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>android | Hexo</title>
+  <title>docker基本操作 | Hexo</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/30/6-android/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/05/11-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          android
+          docker基本操作
         </h1>
 
         <div class="post-meta">
@@ -172,16 +172,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2022-10-30 16:54:12" itemprop="dateCreated datePublished" datetime="2022-10-30T16:54:12+08:00">2022-10-30</time>
+              <time title="Created: 2022-11-05 18:16:54 / Modified: 18:17:46" itemprop="dateCreated datePublished" datetime="2022-11-05T18:16:54+08:00">2022-11-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-05 18:11:59" itemprop="dateModified" datetime="2022-11-05T18:11:59+08:00">2022-11-05</time>
-              </span>
 
           
 
@@ -194,25 +188,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>[TOC]</p>
-<h2 id="3-init进程"><a href="#3-init进程" class="headerlink" title="3.init进程"></a>3.init进程</h2><h2 id="4-JNI与NDK"><a href="#4-JNI与NDK" class="headerlink" title="4. JNI与NDK"></a>4. JNI与NDK</h2><p>4.1 Android 与 JNI<br>4.2 JNI的基本原理<br>4.3 调用JNI函数<br>4.4 在C程序中运行Java类<br>4.5 直接注册JNI本地函数<br>4.6 使用Android NDK开发</p>
-<h2 id="5-Zygote-P137"><a href="#5-Zygote-P137" class="headerlink" title="5. Zygote P137"></a>5. Zygote P137</h2><p>5.1 Zygote是什么<br>5.2 由app_process运行ZygoteInit class</p>
-<p>Zygote由Java编写, 不能直接由init启动。需要由app_process进程生成dalvik虚拟机，在虚拟机上状态运行ZygoteInit类。</p>
-<p>5.2.1 生成AppRuntime对象<br>AppRuntime –&gt; AndroidRuntime</p>
-<p><code>app_process [java-options] cmd-dir start-class-name [options]</code></p>
-<ul>
-<li>java-options 传给虚拟机的选项，必须以-开始</li>
-<li>cmd-dir 所需要运行的进程所在的目录</li>
-<li>start-class-name 在虚拟机中运行的类的名称, 在加载到虚拟机后调用类的main</li>
-<li>[options] 传递给类的选项</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/system/bin/app_process -Xzygote /system/bin --zygote --start-system-server</span><br></pre></td></tr></table></figure>
+        <p><code>docker exec -it name /bin/bash</code></p>
 
-<p>5.2.2 调用AppRuntime对象</p>
-<p>5.2.3 创建Dalvik虚拟机</p>
-<p>5.2.4 运行ZygoteInit类</p>
-<p>5.3 ZygoteInit类的功能</p>
-<h2 id="6-Android服务概要"><a href="#6-Android服务概要" class="headerlink" title="6. Android服务概要"></a>6. Android服务概要</h2><h2 id="7-Android-Binder-IPC"><a href="#7-Android-Binder-IPC" class="headerlink" title="7. Android Binder IPC"></a>7. Android Binder IPC</h2><h2 id="8-Android-Service-Framework"><a href="#8-Android-Service-Framework" class="headerlink" title="8. Android Service Framework"></a>8. Android Service Framework</h2><h2 id="9-本地系统服务-Native-System-Service"><a href="#9-本地系统服务-Native-System-Service" class="headerlink" title="9. 本地系统服务 Native System Service"></a>9. 本地系统服务 Native System Service</h2><h2 id="10-Java服务框架-Java-Service-Framework"><a href="#10-Java服务框架-Java-Service-Framework" class="headerlink" title="10. Java服务框架 Java Service Framework"></a>10. Java服务框架 Java Service Framework</h2><h2 id="11-Java系统服务运行分析"><a href="#11-Java系统服务运行分析" class="headerlink" title="11. Java系统服务运行分析"></a>11. Java系统服务运行分析</h2>
     </div>
 
     
@@ -227,13 +204,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/10/24/1-tunnel/" rel="prev" title="tunnel原理的一点学习">
-      <i class="fa fa-chevron-left"></i> tunnel原理的一点学习
+    <a href="/2022/11/05/10-xaas/" rel="prev" title="Xaas">
+      <i class="fa fa-chevron-left"></i> Xaas
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/11/01/7-page_load/" rel="next" title="page-load">
-      page-load <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -292,7 +266,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-init%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">3.init进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-JNI%E4%B8%8ENDK"><span class="nav-number">2.</span> <span class="nav-text">4. JNI与NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Zygote-P137"><span class="nav-number">3.</span> <span class="nav-text">5. Zygote P137</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Android%E6%9C%8D%E5%8A%A1%E6%A6%82%E8%A6%81"><span class="nav-number">4.</span> <span class="nav-text">6. Android服务概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Android-Binder-IPC"><span class="nav-number">5.</span> <span class="nav-text">7. Android Binder IPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Android-Service-Framework"><span class="nav-number">6.</span> <span class="nav-text">8. Android Service Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E6%9C%AC%E5%9C%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1-Native-System-Service"><span class="nav-number">7.</span> <span class="nav-text">9. 本地系统服务 Native System Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Java%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6-Java-Service-Framework"><span class="nav-number">8.</span> <span class="nav-text">10. Java服务框架 Java Service Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Java%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E8%BF%90%E8%A1%8C%E5%88%86%E6%9E%90"><span class="nav-number">9.</span> <span class="nav-text">11. Java系统服务运行分析</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
