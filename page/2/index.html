@@ -145,6 +145,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/17/3-arch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/17/3-arch/" class="post-title-link" itemprop="url">折腾arch</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-10-17 16:33:30" itemprop="dateCreated datePublished" datetime="2022-10-17T16:33:30+08:00">2022-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-18 20:19:40" itemprop="dateModified" datetime="2022-10-18T20:19:40+08:00">2022-10-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="xorg"><a href="#xorg" class="headerlink" title="xorg"></a>xorg</h3><p>sudo pacman -S xorg-server xorg-apps xorg-xinit xorg-xclock xterm </p>
+<h3 id="kde-plasma"><a href="#kde-plasma" class="headerlink" title="kde plasma"></a>kde plasma</h3><p>sudo pacman -S plasma<br>sudo pacman -S kde-applications</p>
+<h3 id="登录管理器"><a href="#登录管理器" class="headerlink" title="登录管理器"></a>登录管理器</h3><p>sddm: simple desktop display manager</p>
+<p>sudo pacman -S sddm<br>sudo systemctl enable sddm<br>sudo systemctl start sddm</p>
+<p>X是协议，不是某个软件.<br>X11R6 是 X协议的Release 6版本</p>
+<p>twm是什么<br>TabWindow Manager for the X WindowSystem. 是一个窗口管理器</p>
+<p>终端模拟器<br>sTerm, Rxvt, Konsole, Kvt, Gnome-Terminal, Nxterm, eterm</p>
+<p>xrdp</p>
+<p>run level <a target="_blank" rel="noopener" href="https://blog.csdn.net/newnewman80/article/details/8133797">inittab详解</a><br>0 - 关闭或暂停系统 | shutdown.target<br>1 - 单用户模式 | rescue.target<br>2 - 多用户, 没有NFS | multi-user.target<br>3 - 完全多用户 | multi-user.target<br>4 - 保留 | multi-user.target<br>5 - X11(图形用户界面) | graphical.target<br>6 - 重启系统 | reboot.target</p>
+<h3 id="systemd"><a href="#systemd" class="headerlink" title="systemd"></a>systemd</h3><p><a target="_blank" rel="noopener" href="http://blog.itpub.net/31524109/viewspace-2647049/">http://blog.itpub.net/31524109/viewspace-2647049/</a></p>
+<p>Display manager: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></p>
+<p>dwm安装<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45933858/article/details/124553077">https://blog.csdn.net/qq_45933858/article/details/124553077</a></p>
+<p>kde是桌面</p>
+<p>DM: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a><br>DM是显示管理器, 也叫登录管理器。<br>SDDM - Simple Desktop Display Manager<br>不同DM的区别 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36073714/article/details/116758417">https://blog.csdn.net/weixin_36073714/article/details/116758417</a><br>WM(Window Manager)</p>
+<p>REF:<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EasonJim/p/7230616.html">https://www.cnblogs.com/EasonJim/p/7230616.html</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a05559a7b757">https://www.jianshu.com/p/a05559a7b757</a><br><a target="_blank" rel="noopener" href="https://jtao.work/archives/x--w-i-n-d-o-w--she-zhi-jie-shao">https://jtao.work/archives/x--w-i-n-d-o-w--she-zhi-jie-shao</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Deepin_Desktop_Environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">deepin lighdm配置</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Window_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Window Manager</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/KDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%90%AF%E5%8A%A8_Plasma">KDE plasma</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChunfengZhang/article/details/4450531">&#x2F;etc&#x2F;inittab</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/SysVinit_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">arch inittab</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yusiguyuan/article/details/9928139">ubuntu</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/17/5-git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -346,7 +425,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
