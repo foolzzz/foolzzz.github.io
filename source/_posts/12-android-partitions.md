@@ -64,4 +64,104 @@ Number  Start   End     Size    File system  Name          Flags
 45      6761MB  63.8GB  57.1GB  ext4         userdata
 
 (parted)
+walleye:/bin #
+walleye:/bin # parted /dev/block/sdb
+GNU Parted 3.4
+Using /dev/block/sdb
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) p
+Model: SAMSUNG KLUCG4J1ED-B0C1 (scsi)
+Disk /dev/block/sdb: 4194kB
+Sector size (logical/physical): 4096B/4096B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name   Flags
+ 1      24.6kB  4174kB  4149kB               xbl_a
+
+(parted)
+walleye:/bin # parted /dev/block/sdc
+GNU Parted 3.4
+Using /dev/block/sdc
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) p
+Model: SAMSUNG KLUCG4J1ED-B0C1 (scsi)
+Disk /dev/block/sdc: 4194kB
+Sector size (logical/physical): 4096B/4096B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name   Flags
+ 1      24.6kB  4174kB  4149kB               xbl_b
+
+(parted)
+walleye:/bin # parted /dev/block/sdd
+GNU Parted 3.4
+Using /dev/block/sdd
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) p
+Model: SAMSUNG KLUCG4J1ED-B0C1 (scsi)
+Disk /dev/block/sdd: 101MB
+Sector size (logical/physical): 4096B/4096B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name      Flags
+ 1      24.6kB  1073kB  1049kB               misc
+ 2      1073kB  1081kB  8192B                ssd
+ 3      1081kB  34.6MB  33.6MB  ext4         persist
+ 4      34.6MB  35.2MB  524kB                frp
+ 5      35.2MB  35.2MB  4096B                cdt
+ 6      35.2MB  36.2MB  1049kB               ddr
+ 7      36.2MB  36.3MB  131kB                sec
+ 8      36.3MB  37.4MB  1049kB               dip
+ 9      37.4MB  37.4MB  4096B                dpo
+10      37.4MB  71.6MB  34.2MB               splash
+11      71.6MB  71.6MB  4096B                limits
+12      71.6MB  72.7MB  1049kB               toolsfv
+13      72.7MB  81.1MB  8389kB               logfs
+14      81.1MB  83.2MB  2097kB               sti
+15      83.2MB  85.3MB  2097kB               modemst1
+16      85.3MB  87.4MB  2097kB               modemst2
+17      87.4MB  88.4MB  1049kB               fsc
+18      88.4MB  101MB   12.2MB               reserve3  msftdata
+
+(parted)
+walleye:/bin # parted /dev/block/sde
+GNU Parted 3.4
+Using /dev/block/sde
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) p
+Model: SAMSUNG KLUCG4J1ED-B0C1 (scsi)
+Disk /dev/block/sde: 37.7MB
+Sector size (logical/physical): 4096B/4096B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name      Flags
+ 1      24.6kB  6316kB  6291kB               ramdump
+ 2      6316kB  10.5MB  4194kB               pg1fs
+ 3      10.5MB  12.6MB  2097kB               pg2fs
+ 4      12.6MB  29.4MB  16.8MB  ext4         metadata  msftdata
+ 5      29.4MB  37.7MB  8344kB               reserve4  msftdata
+
+(parted)
+walleye:/bin # parted /dev/block/sdf
+GNU Parted 3.4
+Using /dev/block/sdf
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) p
+Model: SAMSUNG KLUCG4J1ED-B0C1 (scsi)
+Disk /dev/block/sdf: 8389kB
+Sector size (logical/physical): 4096B/4096B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End     Size    File system  Name        Flags
+ 1      24.6kB  41.0kB  16.4kB               board_info
+ 2      41.0kB  303kB   262kB                mfg
+ 3      303kB   1876kB  1573kB               fsg
+ 4      1876kB  1880kB  4096B                devinfo
+ 5      1880kB  8368kB  6488kB               reserve5    msftdata
+
 ```
