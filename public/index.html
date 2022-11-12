@@ -145,6 +145,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/12/12-android-partitions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/12/12-android-partitions/" class="post-title-link" itemprop="url">android partitions</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-11-12 20:00:01 / Modified: 20:00:21" itemprop="dateCreated datePublished" datetime="2022-11-12T20:00:01+08:00">2022-11-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">walleye:/bin <span class="comment"># parted /dev/block/sda</span></span><br><span class="line">GNU Parted 3.4</span><br><span class="line">Using /dev/block/sda</span><br><span class="line">Welcome to GNU Parted! Type <span class="string">&#x27;help&#x27;</span> to view a list of commands.</span><br><span class="line">(parted) p</span><br><span class="line">Model: SAMSUNG KLUCG4J1ED-B0C1 (scsi)</span><br><span class="line">Disk /dev/block/sda: 63.8GB</span><br><span class="line">Sector size (logical/physical): 4096B/4096B</span><br><span class="line">Partition Table: gpt</span><br><span class="line">Disk Flags:</span><br><span class="line"></span><br><span class="line">Number  Start   End     Size    File system  Name          Flags</span><br><span class="line"> 1      24.6kB  65.5kB  41.0kB               padding0      msftdata</span><br><span class="line"> 2      65.5kB  590kB   524kB                lockbooter_a</span><br><span class="line"> 3      590kB   1114kB  524kB                rpm_a</span><br><span class="line"> 4      1114kB  3211kB  2097kB               tz_a</span><br><span class="line"> 5      3211kB  3736kB  524kB                hyp_a</span><br><span class="line"> 6      3736kB  4260kB  524kB                pmic_a</span><br><span class="line"> 7      4260kB  88.1MB  83.9MB               modem_a       msftdata</span><br><span class="line"> 8      88.1MB  89.2MB  1049kB               abl_a</span><br><span class="line"> 9      89.2MB  123MB   33.6MB               boot_a</span><br><span class="line">10      123MB   156MB   33.6MB               hosd_a</span><br><span class="line">11      156MB   157MB   524kB                keymaster_a</span><br><span class="line">12      157MB   157MB   524kB                cmnlib_a</span><br><span class="line">13      157MB   158MB   524kB                cmnlib64_a</span><br><span class="line">14      158MB   158MB   262kB                apdp_a</span><br><span class="line">15      158MB   158MB   262kB                msadp_a</span><br><span class="line">16      158MB   159MB   131kB                devcfg_a</span><br><span class="line">17      159MB   159MB   131kB                storsec_a</span><br><span class="line">18      159MB   159MB   65.5kB               vbmeta_a</span><br><span class="line">19      159MB   162MB   3146kB               trusty_a</span><br><span class="line">20      162MB   686MB   524MB   ext2         vendor_a      msftdata</span><br><span class="line">21      686MB   695MB   8389kB               dtbo_a</span><br><span class="line">22      695MB   3379MB  2684MB  ext2         system_a</span><br><span class="line">23      3379MB  3379MB  524kB                lockbooter_b</span><br><span class="line">24      3379MB  3380MB  524kB                rpm_b</span><br><span class="line">25      3380MB  3382MB  2097kB               tz_b</span><br><span class="line">26      3382MB  3383MB  524kB                hyp_b</span><br><span class="line">27      3383MB  3383MB  524kB                pmic_b</span><br><span class="line">28      3383MB  3467MB  83.9MB               modem_b</span><br><span class="line">29      3467MB  3468MB  1049kB               abl_b</span><br><span class="line">30      3468MB  3502MB  33.6MB               boot_b</span><br><span class="line">31      3502MB  3535MB  33.6MB               hosd_b</span><br><span class="line">32      3535MB  3536MB  524kB                keymaster_b</span><br><span class="line">33      3536MB  3536MB  524kB                cmnlib_b</span><br><span class="line">34      3536MB  3537MB  524kB                cmnlib64_b</span><br><span class="line">35      3537MB  3537MB  262kB                apdp_b</span><br><span class="line">36      3537MB  3537MB  262kB                msadp_b</span><br><span class="line">37      3537MB  3537MB  131kB                devcfg_b</span><br><span class="line">38      3537MB  3538MB  131kB                storsec_b</span><br><span class="line">39      3538MB  3538MB  65.5kB               vbmeta_b</span><br><span class="line">40      3538MB  3541MB  3146kB               trusty_b</span><br><span class="line">41      3541MB  4065MB  524MB   ext2         vendor_b</span><br><span class="line">42      4065MB  4073MB  8389kB               dtbo_b</span><br><span class="line">43      4073MB  6758MB  2684MB  ext2         system_b</span><br><span class="line">44      6758MB  6761MB  3473kB               padding1      msftdata</span><br><span class="line">45      6761MB  63.8GB  57.1GB  ext4         userdata</span><br><span class="line"></span><br><span class="line">(parted)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/05/11-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -566,7 +624,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-05 18:11:59" itemprop="dateModified" datetime="2022-11-05T18:11:59+08:00">2022-11-05</time>
+                <time title="Modified: 2022-11-12 18:25:02" itemprop="dateModified" datetime="2022-11-12T18:25:02+08:00">2022-11-12</time>
               </span>
 
           
@@ -598,6 +656,9 @@
 <p>5.2.3 创建Dalvik虚拟机</p>
 <p>5.2.4 运行ZygoteInit类</p>
 <p>5.3 ZygoteInit类的功能</p>
+<p>5.3.1 绑定&#x2F;dev&#x2F;socket&#x2F;zygote套接字</p>
+<p>5.2.3 加载应用程序Framework中的类与平台资源</p>
+<p>5.3.3 运行SystemServer</p>
 <h2 id="6-Android服务概要"><a href="#6-Android服务概要" class="headerlink" title="6. Android服务概要"></a>6. Android服务概要</h2><h2 id="7-Android-Binder-IPC"><a href="#7-Android-Binder-IPC" class="headerlink" title="7. Android Binder IPC"></a>7. Android Binder IPC</h2><h2 id="8-Android-Service-Framework"><a href="#8-Android-Service-Framework" class="headerlink" title="8. Android Service Framework"></a>8. Android Service Framework</h2><h2 id="9-本地系统服务-Native-System-Service"><a href="#9-本地系统服务-Native-System-Service" class="headerlink" title="9. 本地系统服务 Native System Service"></a>9. 本地系统服务 Native System Service</h2><h2 id="10-Java服务框架-Java-Service-Framework"><a href="#10-Java服务框架-Java-Service-Framework" class="headerlink" title="10. Java服务框架 Java Service Framework"></a>10. Java服务框架 Java Service Framework</h2><h2 id="11-Java系统服务运行分析"><a href="#11-Java系统服务运行分析" class="headerlink" title="11. Java系统服务运行分析"></a>11. Java系统服务运行分析</h2>
       
     </div>
@@ -921,85 +982,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/17/3-arch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/17/3-arch/" class="post-title-link" itemprop="url">折腾arch</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-17 16:33:30" itemprop="dateCreated datePublished" datetime="2022-10-17T16:33:30+08:00">2022-10-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-18 20:19:40" itemprop="dateModified" datetime="2022-10-18T20:19:40+08:00">2022-10-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="xorg"><a href="#xorg" class="headerlink" title="xorg"></a>xorg</h3><p>sudo pacman -S xorg-server xorg-apps xorg-xinit xorg-xclock xterm </p>
-<h3 id="kde-plasma"><a href="#kde-plasma" class="headerlink" title="kde plasma"></a>kde plasma</h3><p>sudo pacman -S plasma<br>sudo pacman -S kde-applications</p>
-<h3 id="登录管理器"><a href="#登录管理器" class="headerlink" title="登录管理器"></a>登录管理器</h3><p>sddm: simple desktop display manager</p>
-<p>sudo pacman -S sddm<br>sudo systemctl enable sddm<br>sudo systemctl start sddm</p>
-<p>X是协议，不是某个软件.<br>X11R6 是 X协议的Release 6版本</p>
-<p>twm是什么<br>TabWindow Manager for the X WindowSystem. 是一个窗口管理器</p>
-<p>终端模拟器<br>sTerm, Rxvt, Konsole, Kvt, Gnome-Terminal, Nxterm, eterm</p>
-<p>xrdp</p>
-<p>run level <a target="_blank" rel="noopener" href="https://blog.csdn.net/newnewman80/article/details/8133797">inittab详解</a><br>0 - 关闭或暂停系统 | shutdown.target<br>1 - 单用户模式 | rescue.target<br>2 - 多用户, 没有NFS | multi-user.target<br>3 - 完全多用户 | multi-user.target<br>4 - 保留 | multi-user.target<br>5 - X11(图形用户界面) | graphical.target<br>6 - 重启系统 | reboot.target</p>
-<h3 id="systemd"><a href="#systemd" class="headerlink" title="systemd"></a>systemd</h3><p><a target="_blank" rel="noopener" href="http://blog.itpub.net/31524109/viewspace-2647049/">http://blog.itpub.net/31524109/viewspace-2647049/</a></p>
-<p>Display manager: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></p>
-<p>dwm安装<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45933858/article/details/124553077">https://blog.csdn.net/qq_45933858/article/details/124553077</a></p>
-<p>kde是桌面</p>
-<p>DM: <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/title/Display_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a><br>DM是显示管理器, 也叫登录管理器。<br>SDDM - Simple Desktop Display Manager<br>不同DM的区别 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36073714/article/details/116758417">https://blog.csdn.net/weixin_36073714/article/details/116758417</a><br>WM(Window Manager)</p>
-<p>REF:<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EasonJim/p/7230616.html">https://www.cnblogs.com/EasonJim/p/7230616.html</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a05559a7b757">https://www.jianshu.com/p/a05559a7b757</a><br><a target="_blank" rel="noopener" href="https://jtao.work/archives/x--w-i-n-d-o-w--she-zhi-jie-shao">https://jtao.work/archives/x--w-i-n-d-o-w--she-zhi-jie-shao</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Deepin_Desktop_Environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">deepin lighdm配置</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Window_manager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Window Manager</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/KDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%90%AF%E5%8A%A8_Plasma">KDE plasma</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChunfengZhang/article/details/4450531">&#x2F;etc&#x2F;inittab</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/SysVinit_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">arch inittab</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yusiguyuan/article/details/9928139">ubuntu</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1069,7 +1051,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

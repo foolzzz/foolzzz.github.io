@@ -39,12 +39,14 @@ AppRuntime --> AndroidRuntime
 
 5.2.4 运行ZygoteInit类
 
-
-
-
-
-
 5.3 ZygoteInit类的功能
+
+5.3.1 绑定/dev/socket/zygote套接字
+
+5.2.3 加载应用程序Framework中的类与平台资源
+
+5.3.3 运行SystemServer
+
 
 ## 6. Android服务概要
 ## 7. Android Binder IPC
