@@ -33,4 +33,5 @@ eg:
 1 gallon = 128 oz
 1 pint = 2 cups = 473.176mL
 
-
+### hotel
+standard king room 标准大床房
