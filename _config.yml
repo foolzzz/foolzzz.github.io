@@ -105,6 +105,6 @@ theme: hexo-theme-next-7.8.0
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: ssh://github.com/foolzzz/foolzzz.github.io
+  repository: https://github.com/foolzzz/foolzzz.github.io
   branch: main
 
