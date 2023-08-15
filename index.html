@@ -176,7 +176,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-07 14:53:50" itemprop="dateModified" datetime="2023-08-07T14:53:50+08:00">2023-08-07</time>
+                <time title="Modified: 2023-08-15 21:43:08" itemprop="dateModified" datetime="2023-08-15T21:43:08+08:00">2023-08-15</time>
               </span>
 
           
@@ -252,7 +252,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-07 14:24:55" itemprop="dateModified" datetime="2023-08-07T14:24:55+08:00">2023-08-07</time>
+                <time title="Modified: 2023-08-15 21:43:08" itemprop="dateModified" datetime="2023-08-15T21:43:08+08:00">2023-08-15</time>
               </span>
 
           
@@ -317,7 +317,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/03/us-travel-1-basic-knowledge/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/25/14-k8s/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -331,7 +331,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/12/03/us-travel-1-basic-knowledge/" class="post-title-link" itemprop="url">us-travel-1-basic-knowledge</a>
+            <a href="/2023/06/25/14-k8s/" class="post-title-link" itemprop="url">14-k8s</a>
         </h2>
 
         <div class="post-meta">
@@ -341,7 +341,285 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-12-03 10:49:12" itemprop="dateCreated datePublished" datetime="2022-12-03T10:49:12+08:00">2022-12-03</time>
+              <time title="Created: 2023-06-25 17:50:58" itemprop="dateCreated datePublished" datetime="2023-06-25T17:50:58+08:00">2023-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-08-15 21:43:08" itemprop="dateModified" datetime="2023-08-15T21:43:08+08:00">2023-08-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="k8s基础"><a href="#k8s基础" class="headerlink" title="k8s基础"></a>k8s基础</h1><h2 id="概念与定义"><a href="#概念与定义" class="headerlink" title="概念与定义"></a>概念与定义</h2><ul>
+<li><p>APIServer</p>
+</li>
+<li><p>Controller-Manager<br>集群状态管理，保证Pod可用，和APIServer通信，负责创建&#x2F;更新&#x2F;删除资源。</p>
+</li>
+<li><p>Scheduler<br>调度中心，根据一系列条件，选择节点，部署pod</p>
+</li>
+<li><p>ETCD<br>键值数据库</p>
+</li>
+<li><p>NODE</p>
+</li>
+<li><p>kubelet<br>负责监听和上报节点上的Pod状态， 与Master节点通信并管理上面的pod</p>
+</li>
+<li><p>kube-proxy<br>负责pod之间的通信和负责均衡，将指定的流量分发到后端正确的机器上.</p>
+</li>
+<li><p>ipvs &#x2F; iptables<br>ipvs 调用 netlink接口 创建ipvs规则。</p>
+</li>
+<li><p>calico<br>符合CNI标准的网络插件, 给每一个pod生成一个唯一的IP地址，并把每个节点当作一个路由。</p>
+</li>
+<li><p>CoreDNS<br>k8s内部集群service解析, 将service名称解析成IP地址，然后通过service的IP地址🔗到对应的应用上。</p>
+</li>
+<li><p>Metrics-Server<br>采集容器数据</p>
+</li>
+<li><p>pod</p>
+</li>
+<li><p>service</p>
+</li>
+<li><p>deployment<br>无状态应用部署</p>
+</li>
+<li><p>statefulset<br>有状态应用部署</p>
+</li>
+<li><p>daemonset</p>
+</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="pod"><a href="#pod" class="headerlink" title="pod"></a>pod</h3><p>kubectl get pod pod-name -o yaml &gt; pod-name.yaml</p>
+<h3 id="deployment"><a href="#deployment" class="headerlink" title="deployment"></a>deployment</h3><p>kubectl create deploy web –image&#x3D;nginx -oyaml –dry-run&#x3D;client &gt; web-deploy.yaml 创建<br>kubectl get deploy web -oyaml &gt; web-deploy-export.yaml 导出</p>
+<h3 id="label"><a href="#label" class="headerlink" title="label"></a>label</h3><h3 id="service"><a href="#service" class="headerlink" title="service"></a>service</h3><p>kubectl expose depoyment web –port&#x3D;80 –target-port&#x3D;80 –dry-run&#x3D;client -o yaml</p>
+<ul>
+<li><p>创建基础yaml文件<br>kubectl create deployment nginx –image&#x3D;nginx:1.16 -oyaml –dry-run&#x3D;client &gt; deploy.yaml<br>kubectl expose deployment nginx –port&#x3D;80 –type&#x3D;NodePort -oyaml –dry-run &gt; svc.yaml</p>
+</li>
+<li><p>创建deployment<br>kubectl create deployment java-demo –image&#x3D;xx&#x2F;java-demo –namespace&#x3D;default –dry-run -oyaml &gt; deployment.yaml</p>
+</li>
+<li><p>创建servicee<br>kubectl expose deployment java-demo –port&#x3D;80 –target-port&#x3D;8080 –type&#x3D;NodePort -o yaml –dry-run&#x3D;client &gt; service.yaml</p>
+</li>
+</ul>
+<p>kubectl get po<br>kubectl get svc<br>kubectl get deploy</p>
+<p>kubectl apply -f xxx.yaml</p>
+<h2 id="使用deployment部署无状态应用"><a href="#使用deployment部署无状态应用" class="headerlink" title="使用deployment部署无状态应用"></a>使用deployment部署无状态应用</h2><p>kubectl create deployment web –image&#x3D;nginx:1.14<br>kubectl get deploy,pods</p>
+<h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><p>kubectl set image deployment&#x2F;web nginx&#x3D;nginx:1.15<br>kubectl rollout status deployment&#x2F;nginx-deployment</p>
+<h3 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h3><p>kubectl rollout history deployment&#x2F;web<br>kubectl rollout undo deployment&#x2F;web<br>kubectl rollout undo deployment&#x2F;web –revision&#x3D;2</p>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>kubectl delete deploy&#x2F;web<br>kubectl delete svc&#x2F;web</p>
+<h2 id="edit"><a href="#edit" class="headerlink" title="edit"></a>edit</h2><p>kubectl edit deployment&#x2F;web<br>kubectl edit svc&#x2F;web</p>
+<p>service &gt; deployment &gt; </p>
+<h2 id="pod-1"><a href="#pod-1" class="headerlink" title="pod"></a>pod</h2><p>kubectl describe pod XXX -n kube-system<br>kubectl logs pod_name -c container-name       查看pod日志<br>kubectl delete deployment xxxx                删除应用</p>
+<p>kubectl scale deploy spark-worker-deployment –replicas&#x3D;8       扩容</p>
+<p>kkubectl delete pod -l app&#x3D;flannel            根据label删除pod</p>
+<h2 id="How-to-make-a-k8s-docker"><a href="#How-to-make-a-k8s-docker" class="headerlink" title="How to make a k8s docker"></a>How to make a k8s docker</h2><p>docker inspect image-name:tag</p>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/arvinhuang/p/16838874.html">https://www.cnblogs.com/arvinhuang/p/16838874.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41761624/article/details/108262772">https://blog.csdn.net/weixin_41761624/article/details/108262772</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/691997">https://developer.aliyun.com/article/691997</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huangbaokang/article/details/109675795">https://blog.csdn.net/huangbaokang/article/details/109675795</a> 生成yaml配置文件</li>
+<li><a target="_blank" rel="noopener" href="http://www.sunrisenan.com/docs/boge/boge-1d5f9ck385qm3">http://www.sunrisenan.com/docs/boge/boge-1d5f9ck385qm3</a></li>
+<li><a target="_blank" rel="noopener" href="http://docs.kubernetes.org.cn/564.html">http://docs.kubernetes.org.cn/564.html</a> 命令行创建服务</li>
+</ul>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ul>
+<li>如何制作k8s镜像</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/20/13-xposed-101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/20/13-xposed-101/" class="post-title-link" itemprop="url">13-xposed-101</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-20 17:30:54" itemprop="dateCreated datePublished" datetime="2023-06-20T17:30:54+08:00">2023-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-08-15 21:43:08" itemprop="dateModified" datetime="2023-08-15T21:43:08+08:00">2023-08-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7194438728381628474">https://juejin.cn/post/7194438728381628474</a> xposed native hook</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Breathleas/xposedhookso">https://github.com/Breathleas/xposedhookso</a> 一个xp so hook demo.<br>修改了加载的so，在自己的so里加载了真正的so，有点不优雅。<br>Hook点</li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/93828be3ff58">https://www.jianshu.com/p/93828be3ff58</a> 另一个xp so hook demo</li>
+</ul>
+<p>Dobby</p>
+<p><code>loadLibrary</code><br><a target="_blank" rel="noopener" href="http://aospxref.com/android-11.0.0_r21/xref/external/jsilver/src/org/clearsilver/jni/JNI.java#81">http://aospxref.com/android-11.0.0_r21/xref/external/jsilver/src/org/clearsilver/jni/JNI.java#81</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">81</span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">loadLibrary</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="number">82</span>  </span><br><span class="line"><span class="number">83</span>      <span class="comment">// Library already loaded? Great - nothing to do.</span></span><br><span class="line"><span class="number">84</span>      <span class="keyword">if</span> (successfullyLoadedLibrary) &#123;</span><br><span class="line"><span class="number">85</span>        <span class="keyword">return</span>;</span><br><span class="line"><span class="number">86</span>      &#125;</span><br><span class="line"><span class="number">87</span>  </span><br><span class="line"><span class="number">88</span>      <span class="keyword">synchronized</span> (callbackLock) &#123;</span><br><span class="line"><span class="number">89</span>  </span><br><span class="line"><span class="number">90</span>        <span class="comment">// Search librarySearchPaths...</span></span><br><span class="line"><span class="number">91</span>        <span class="type">String</span> <span class="variable">platformLibraryName</span> <span class="operator">=</span> System.mapLibraryName(libraryName);</span><br><span class="line"><span class="number">92</span>        <span class="keyword">for</span> (String path : librarySearchPaths) &#123;</span><br><span class="line"><span class="number">93</span>          <span class="keyword">try</span> &#123;</span><br><span class="line"><span class="number">94</span>            <span class="comment">// Attempt to load the library in that path.</span></span><br><span class="line"><span class="number">95</span>            System.load(<span class="keyword">new</span> <span class="title class_">File</span>(path, platformLibraryName).getAbsolutePath()); <span class="comment">// 调用了System.Load</span></span><br><span class="line"><span class="number">96</span>            <span class="comment">// If we got here, it worked. We&#x27;re done.</span></span><br><span class="line"><span class="number">97</span>            successfullyLoadedLibrary = <span class="literal">true</span>;</span><br><span class="line"><span class="number">98</span>            <span class="keyword">return</span>;</span><br><span class="line"><span class="number">99</span>          &#125; <span class="keyword">catch</span> (UnsatisfiedLinkError e) &#123;</span><br><span class="line"><span class="number">100</span>            <span class="comment">// Library not found. Continue loop.</span></span><br><span class="line"><span class="number">101</span>          &#125;</span><br><span class="line"><span class="number">102</span>        &#125;</span><br><span class="line"><span class="number">103</span>  </span><br><span class="line"><span class="number">104</span>        <span class="comment">// Still here? Couldn&#x27;t load library. Fail.</span></span><br><span class="line"><span class="number">105</span>        <span class="keyword">if</span> (failureCallback != <span class="literal">null</span>) &#123;</span><br><span class="line"><span class="number">106</span>          failureCallback.run();</span><br><span class="line"><span class="number">107</span>        &#125;</span><br><span class="line"><span class="number">108</span>      &#125;</span><br><span class="line"><span class="number">109</span>  </span><br><span class="line"><span class="number">110</span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>System.Load</code> 调用了 <code>Runtime.load0</code><br><a target="_blank" rel="noopener" href="http://aospxref.com/android-11.0.0_r21/xref/libcore/ojluni/src/main/java/java/lang/System.java">http://aospxref.com/android-11.0.0_r21/xref/libcore/ojluni/src/main/java/java/lang/System.java</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1626</span>      <span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="number">1627</span>      <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">load</span><span class="params">(String filename)</span> &#123;</span><br><span class="line"><span class="number">1628</span>          Runtime.getRuntime().load0(Reflection.getCallerClass(), filename);</span><br><span class="line"><span class="number">1629</span>      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以hook点可以是 <code>Runtime.load0</code></p>
+<p>REF:<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7194438728381628474">https://juejin.cn/post/7194438728381628474</a> so文件加载原理</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/07/todo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/07/todo/" class="post-title-link" itemprop="url">todo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-07 23:33:01" itemprop="dateCreated datePublished" datetime="2023-06-07T23:33:01+08:00">2023-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-08-15 21:43:08" itemprop="dateModified" datetime="2023-08-15T21:43:08+08:00">2023-08-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><input disabled="" type="checkbox"> boringssl &#x2F; titkok抓包脚本</li>
+<li><input disabled="" type="checkbox"> 编译chromium浏览器</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/02/us-travel-1-basic-knowledge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/02/us-travel-1-basic-knowledge/" class="post-title-link" itemprop="url">us-travel-1-basic-knowledge</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-12-02 18:49:12" itemprop="dateCreated datePublished" datetime="2022-12-02T18:49:12+08:00">2022-12-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -655,277 +933,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/03/8-typescript/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/03/8-typescript/" class="post-title-link" itemprop="url">typescript</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-03 17:33:52" itemprop="dateCreated datePublished" datetime="2022-11-03T17:33:52+08:00">2022-11-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-05 15:26:02" itemprop="dateModified" datetime="2022-11-05T15:26:02+08:00">2022-11-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><ul>
-<li>any</li>
-<li>number</li>
-<li>string</li>
-<li>boolean</li>
-<li>数组</li>
-<li>元祖</li>
-<li>枚举</li>
-<li>void</li>
-<li>null<br>null表示 什么都没有, 是一个只有一个值的特殊类型。表示一个空对象的引用。</li>
-<li>undefined<br>undefined是一个没有设置值的变量。</li>
-<li>never</li>
-</ul>
-<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p><code>var [变量名] : [类型] = 值</code></p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="attr">uname</span>:<span class="built_in">string</span> = <span class="string">&quot;Runoob&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="类型断言-Type-Assertion"><a href="#类型断言-Type-Assertion" class="headerlink" title="类型断言 (Type Assertion)"></a>类型断言 (Type Assertion)</h3><p><code>&lt;类型&gt;值</code><br><code>值 as 类型</code></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;1&#x27;</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">str2</span>:<span class="built_in">number</span> = &lt;<span class="built_in">number</span>&gt; &lt;<span class="built_in">any</span>&gt; str</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str2)</span><br></pre></td></tr></table></figure>
-
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ - * / % ++ -- </span><br></pre></td></tr></table></figure>
-<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">== != &gt; &lt; &gt;= &lt;= </span><br></pre></td></tr></table></figure>
-<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p><code>&amp;&amp; || !</code></p>
-<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><p><code>&amp; | - ^ &lt;&lt; &gt;&gt; &gt;&gt;&gt;</code></p>
-<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><p><code>= += -= *= /=</code></p>
-<h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><p><code>? :</code></p>
-<h3 id="类型运算符"><a href="#类型运算符" class="headerlink" title="类型运算符"></a>类型运算符</h3><p><code>typeof</code><br><code>instanceof</code></p>
-<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if</span><br><span class="line">if else</span><br><span class="line">if ... else if ... else ...</span><br><span class="line">switch </span><br></pre></td></tr></table></figure>
-<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">for</span>(init; condition; increment) &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="keyword">for</span>(val <span class="keyword">in</span> list) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="string">&quot;string&quot;</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> entry <span class="keyword">of</span> someArray) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(entry); <span class="comment">// 1, &quot;string&quot;, false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4</span></span><br><span class="line"><span class="keyword">let</span> list = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line">list.<span class="title function_">foreach</span>(<span class="function">(<span class="params">val, idx, arr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5</span></span><br><span class="line">list.<span class="title function_">every</span>(<span class="function">(<span class="params">val, idx, arr</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// Continue</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6</span></span><br><span class="line"><span class="keyword">while</span>(cond) &#123;</span><br><span class="line">  statement;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(cond);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">functon () &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数返回值</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params"></span>) : return_type &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// eg</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params"></span>) : <span class="built_in">string</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 带参数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">number</span></span>) : <span class="built_in">number</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选参数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">buildName</span>(<span class="params">firstName: <span class="built_in">string</span>, lastName?: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(lastName) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认参数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">calculate</span>(<span class="params">price: <span class="built_in">number</span>, rate: <span class="built_in">number</span> = <span class="number">0.50</span></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 剩余参数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">buildName</span>(<span class="params">firstName: <span class="built_in">string</span>, ...restOfName: <span class="built_in">string</span>[]</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> firstName + <span class="string">&quot; &quot;</span> + restOfName.<span class="title function_">join</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匿名函数</span></span><br><span class="line"><span class="keyword">var</span> msg = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;hello world!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匿名函数自调用</span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="string">&#x27;hello!&#x27;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造 函数</span></span><br><span class="line"><span class="keyword">var</span> res = <span class="keyword">new</span> <span class="title class_">Function</span>([arg1, arg2], functionBody);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// eg:</span></span><br><span class="line"><span class="keyword">var</span> myFunction = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;return a+b;&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// lambda</span></span><br><span class="line">([param1, param2, ...paramN]) =&gt; statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">foo</span> = (<span class="params">x: <span class="built_in">number</span></span>) =&gt; <span class="number">10</span> + x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Typescript-Number"><a href="#Typescript-Number" class="headerlink" title="Typescript Number"></a>Typescript Number</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MAX_VALUE</span><br><span class="line">MIN_VALUE</span><br><span class="line">NaN</span><br><span class="line">NEGATIVE_INFINITY</span><br><span class="line">POSITIVE_INFINITY</span><br><span class="line">prototype</span><br><span class="line">constructor</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><h2 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h2><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">IPerson</span> &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">sayHi</span>: <span class="function">()=&gt;</span><span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="attr">customer</span>: <span class="title class_">IPerson</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Hanks&quot;</span>,</span><br><span class="line">  <span class="attr">sayHi</span>: ():<span class="function"><span class="params">string</span> =&gt;</span> &#123;<span class="keyword">return</span> <span class="string">&quot;Hi there&quot;</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="attr">employer</span>:<span class="title class_">IPerson</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>:<span class="string">&quot;Jim&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>:<span class="string">&quot;Balkes&quot;</span>,</span><br><span class="line">  <span class="attr">sayHi</span>: ():<span class="function"><span class="params">string</span> =&gt;</span> &#123; <span class="keyword">return</span> <span class="string">&quot;Hello!&quot;</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">RunOptions</span> &#123;</span><br><span class="line">  <span class="attr">program</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">commandLine</span>: <span class="built_in">string</span>[]|<span class="built_in">string</span>|<span class="function">()=&gt;</span><span class="built_in">string</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="attr">options</span>:<span class="title class_">RunOptions</span> = &#123;<span class="attr">program</span>:<span class="string">&quot;test1&quot;</span>, <span class="attr">commandLine</span>: <span class="string">&quot;Hello&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 限制数组的索引值为number</span></span><br><span class="line"><span class="keyword">interface</span> namelist &#123;</span><br><span class="line">  [<span class="attr">index</span>:<span class="built_in">number</span>]: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> <span class="attr">list2</span>:namelist = [<span class="string">&quot;Google&quot;</span>, <span class="string">&quot;Runoob&quot;</span>, <span class="string">&quot;TaoTao&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接口继承</span></span><br><span class="line"><span class="title class_">Child</span>_interface_name <span class="keyword">extends</span> super_interface_name;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Child</span>_interface_name <span class="keyword">extends</span> super_interface1_name,super_interface2_name,super_interface3_name;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 单继承实例</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Perosn</span> &#123;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Musician</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">instrument</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> drummer = &lt;<span class="title class_">Musician</span>&gt;&#123;&#125;;</span><br><span class="line">drummer.<span class="property">age</span> = <span class="number">27</span>;</span><br><span class="line">drummer.<span class="property">instrument</span> = <span class="string">&quot;Drums&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IParent1</span> &#123;</span><br><span class="line">  <span class="attr">v1</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Iparent2</span> &#123;</span><br><span class="line">  <span class="attr">v2</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_">IParent1</span>, <span class="title class_">IParent2</span> &#123; &#125;</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Iobj</span>:<span class="title class_">Child</span> = &#123;<span class="attr">v1</span>:<span class="number">12</span>, <span class="attr">v2</span>:<span class="number">23</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span> &#123;</span><br><span class="line">  <span class="attr">engine</span>:<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">engine:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">engine</span> = engine;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">disp</span>():<span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;engine: &quot;</span> + <span class="variable language_">this</span>.<span class="property">engine</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&quot;BMW&quot;</span>);</span><br><span class="line"></span><br><span class="line">obj.<span class="title function_">disp</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类继承</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">  <span class="title class_">Area</span>:<span class="built_in">number</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">a:<span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">Area</span> = a;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Shape</span> &#123;</span><br><span class="line">  <span class="title function_">disp</span>():<span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Circle Area: &quot;</span> + <span class="variable language_">this</span>.<span class="property">Area</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">Circle</span>(<span class="number">223</span>);</span><br><span class="line">obj.<span class="title function_">disp</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// ts 不支持多继承</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 支持方法重写，调用父类用super</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// static用于定义类的数据成员(属性/方法)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StaticMem</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="attr">num</span>:<span class="built_in">number</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">disp</span>():<span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Num: &quot;</span> + <span class="title class_">StaticMem</span>.<span class="property">num</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// instanceof</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title class_">Person</span>()</span><br><span class="line"><span class="keyword">var</span> isPerson = obj <span class="keyword">instanceof</span> <span class="title class_">Person</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;是吗?&quot;</span> + isPerson);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问控制符</span></span><br><span class="line"><span class="comment">//  public/protected/private</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Encapsulate</span> &#123;</span><br><span class="line">  <span class="attr">str1</span>:<span class="built_in">string</span> = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">str2</span>:<span class="built_in">string</span> = <span class="string">&quot;world&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// var obj = new Encapsulate();</span></span><br></pre></td></tr></table></figure>
-
-<p>类和接口</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">ILoan</span> &#123;</span><br><span class="line">  <span class="attr">interest</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AgriLoan</span> implemnts <span class="title class_">ILoan</span> &#123;</span><br><span class="line">  <span class="attr">interest</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">rebate</span>: <span class="built_in">number</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">interest:<span class="built_in">number</span>,rebate:<span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">interest</span>=interest</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rebate</span>=rebate</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">key1</span>:<span class="string">&quot;value1&quot;</span>,</span><br><span class="line">  <span class="attr">key3</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">key4</span>:[<span class="string">&quot;a&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Duck Typing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IPoint</span> &#123;</span><br><span class="line">  <span class="attr">x</span>:<span class="built_in">number</span></span><br><span class="line">  <span class="attr">y</span>:<span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addPoints</span>(<span class="params">p1:IPoint, p2:IPoint</span>):<span class="title class_">IPoint</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> x = p1.<span class="property">x</span> + p2.<span class="property">x</span></span><br><span class="line">  <span class="keyword">var</span> y = p1.<span class="property">y</span> + p2.<span class="property">y</span></span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">x</span>:x, <span class="attr">y</span>:y&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Typescript-namespace"><a href="#Typescript-namespace" class="headerlink" title="Typescript namespace"></a>Typescript namespace</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> nsa &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">ISomeInterfaceName</span> &#123; &#125;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">SomeClassName</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nsa.<span class="property">SomeClassName</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果命名空间在一个单独ts文件中，可以使用///引用他</span></span><br><span class="line"><span class="comment">/// &lt;reference path=&quot;SomeFileName.ts&quot;&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Typescript-module"><a href="#Typescript-module" class="headerlink" title="Typescript module"></a>Typescript module</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">SomeInterface</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> someInterfaceRef = <span class="built_in">require</span>(<span class="string">&quot;./SomeInterface&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="声明文件"><a href="#声明文件" class="headerlink" title="声明文件"></a>声明文件</h2><p>xx.d.ts</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="keyword">var</span> <span class="attr">jQuery</span>: <span class="function">(<span class="params">selector: <span class="built_in">string</span></span>) =&gt;</span> <span class="built_in">any</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">jQuery</span>(<span class="string">&quot;#foo&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p>菜鸟教程 <a target="_blank" rel="noopener" href="https://www.runoob.com/typescript/ts-interface.html">https://www.runoob.com/typescript/ts-interface.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/01/7-page_load/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/01/7-page_load/" class="post-title-link" itemprop="url">page-load</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-11-01 11:21:39 / Modified: 11:44:51" itemprop="dateCreated datePublished" datetime="2022-11-01T11:21:39+08:00">2022-11-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><p>preload<br>提升资源加载的优先级.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;preload&quot;</span> <span class="attr">as</span>=<span class="string">&quot;script&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./main.js&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>prefetch<br>用于加载未来页面会用到的资源, 并且告诉浏览器在空闲的时候下载.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;prefetch&quot;</span> <span class="attr">as</span>=<span class="string">&quot;script&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>preconnect<br>预建立连接</p>
-</li>
-<li><p>dns-prefetch<br>预解析dns</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.bootcss.com&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15089765/2600770?articleABtest=1">https://blog.51cto.com/u_15089765/2600770?articleABtest=1</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/30/6-android/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/30/6-android/" class="post-title-link" itemprop="url">android</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-30 16:54:12" itemprop="dateCreated datePublished" datetime="2022-10-30T16:54:12+08:00">2022-10-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-12 18:25:02" itemprop="dateModified" datetime="2022-11-12T18:25:02+08:00">2022-11-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p>
-<h2 id="3-init进程"><a href="#3-init进程" class="headerlink" title="3.init进程"></a>3.init进程</h2><h2 id="4-JNI与NDK"><a href="#4-JNI与NDK" class="headerlink" title="4. JNI与NDK"></a>4. JNI与NDK</h2><p>4.1 Android 与 JNI<br>4.2 JNI的基本原理<br>4.3 调用JNI函数<br>4.4 在C程序中运行Java类<br>4.5 直接注册JNI本地函数<br>4.6 使用Android NDK开发</p>
-<h2 id="5-Zygote-P137"><a href="#5-Zygote-P137" class="headerlink" title="5. Zygote P137"></a>5. Zygote P137</h2><p>5.1 Zygote是什么<br>5.2 由app_process运行ZygoteInit class</p>
-<p>Zygote由Java编写, 不能直接由init启动。需要由app_process进程生成dalvik虚拟机，在虚拟机上状态运行ZygoteInit类。</p>
-<p>5.2.1 生成AppRuntime对象<br>AppRuntime –&gt; AndroidRuntime</p>
-<p><code>app_process [java-options] cmd-dir start-class-name [options]</code></p>
-<ul>
-<li>java-options 传给虚拟机的选项，必须以-开始</li>
-<li>cmd-dir 所需要运行的进程所在的目录</li>
-<li>start-class-name 在虚拟机中运行的类的名称, 在加载到虚拟机后调用类的main</li>
-<li>[options] 传递给类的选项</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/system/bin/app_process -Xzygote /system/bin --zygote --start-system-server</span><br></pre></td></tr></table></figure>
-
-<p>5.2.2 调用AppRuntime对象</p>
-<p>5.2.3 创建Dalvik虚拟机</p>
-<p>5.2.4 运行ZygoteInit类</p>
-<p>5.3 ZygoteInit类的功能</p>
-<p>5.3.1 绑定&#x2F;dev&#x2F;socket&#x2F;zygote套接字</p>
-<p>5.2.3 加载应用程序Framework中的类与平台资源</p>
-<p>5.3.3 运行SystemServer</p>
-<h2 id="6-Android服务概要"><a href="#6-Android服务概要" class="headerlink" title="6. Android服务概要"></a>6. Android服务概要</h2><h2 id="7-Android-Binder-IPC"><a href="#7-Android-Binder-IPC" class="headerlink" title="7. Android Binder IPC"></a>7. Android Binder IPC</h2><h2 id="8-Android-Service-Framework"><a href="#8-Android-Service-Framework" class="headerlink" title="8. Android Service Framework"></a>8. Android Service Framework</h2><h2 id="9-本地系统服务-Native-System-Service"><a href="#9-本地系统服务-Native-System-Service" class="headerlink" title="9. 本地系统服务 Native System Service"></a>9. 本地系统服务 Native System Service</h2><h2 id="10-Java服务框架-Java-Service-Framework"><a href="#10-Java服务框架-Java-Service-Framework" class="headerlink" title="10. Java服务框架 Java Service Framework"></a>10. Java服务框架 Java Service Framework</h2><h2 id="11-Java系统服务运行分析"><a href="#11-Java系统服务运行分析" class="headerlink" title="11. Java系统服务运行分析"></a>11. Java系统服务运行分析</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -995,7 +1002,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

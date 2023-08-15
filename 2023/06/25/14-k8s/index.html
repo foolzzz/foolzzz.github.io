@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="k8s基础概念与定义 APIServer  Controller-Manager集群状态管理，保证Pod可用，和APIServer通信，负责创建&#x2F;更新&#x2F;删除资源。  Scheduler调度中心，根据一系列条件，选择节点，部署pod  ETCD键值数据库  NODE  kubelet负责监听和上报节点上的Pod状态， 与Master节点通信并管理上面的pod  kube-prox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14-k8s">
+<meta property="og:url" content="http://example.com/2023/06/25/14-k8s/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="k8s基础概念与定义 APIServer  Controller-Manager集群状态管理，保证Pod可用，和APIServer通信，负责创建&#x2F;更新&#x2F;删除资源。  Scheduler调度中心，根据一系列条件，选择节点，部署pod  ETCD键值数据库  NODE  kubelet负责监听和上报节点上的Pod状态， 与Master节点通信并管理上面的pod  kube-prox">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-25T09:50:58.000Z">
+<meta property="article:modified_time" content="2023-08-15T13:43:08.568Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/25/14-k8s/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>14-k8s | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/25/14-k8s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          14-k8s
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-25 17:50:58" itemprop="dateCreated datePublished" datetime="2023-06-25T17:50:58+08:00">2023-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-08-15 21:43:08" itemprop="dateModified" datetime="2023-08-15T21:43:08+08:00">2023-08-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="k8s基础"><a href="#k8s基础" class="headerlink" title="k8s基础"></a>k8s基础</h1><h2 id="概念与定义"><a href="#概念与定义" class="headerlink" title="概念与定义"></a>概念与定义</h2><ul>
+<li><p>APIServer</p>
+</li>
+<li><p>Controller-Manager<br>集群状态管理，保证Pod可用，和APIServer通信，负责创建&#x2F;更新&#x2F;删除资源。</p>
+</li>
+<li><p>Scheduler<br>调度中心，根据一系列条件，选择节点，部署pod</p>
+</li>
+<li><p>ETCD<br>键值数据库</p>
+</li>
+<li><p>NODE</p>
+</li>
+<li><p>kubelet<br>负责监听和上报节点上的Pod状态， 与Master节点通信并管理上面的pod</p>
+</li>
+<li><p>kube-proxy<br>负责pod之间的通信和负责均衡，将指定的流量分发到后端正确的机器上.</p>
+</li>
+<li><p>ipvs &#x2F; iptables<br>ipvs 调用 netlink接口 创建ipvs规则。</p>
+</li>
+<li><p>calico<br>符合CNI标准的网络插件, 给每一个pod生成一个唯一的IP地址，并把每个节点当作一个路由。</p>
+</li>
+<li><p>CoreDNS<br>k8s内部集群service解析, 将service名称解析成IP地址，然后通过service的IP地址🔗到对应的应用上。</p>
+</li>
+<li><p>Metrics-Server<br>采集容器数据</p>
+</li>
+<li><p>pod</p>
+</li>
+<li><p>service</p>
+</li>
+<li><p>deployment<br>无状态应用部署</p>
+</li>
+<li><p>statefulset<br>有状态应用部署</p>
+</li>
+<li><p>daemonset</p>
+</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="pod"><a href="#pod" class="headerlink" title="pod"></a>pod</h3><p>kubectl get pod pod-name -o yaml &gt; pod-name.yaml</p>
+<h3 id="deployment"><a href="#deployment" class="headerlink" title="deployment"></a>deployment</h3><p>kubectl create deploy web –image&#x3D;nginx -oyaml –dry-run&#x3D;client &gt; web-deploy.yaml 创建<br>kubectl get deploy web -oyaml &gt; web-deploy-export.yaml 导出</p>
+<h3 id="label"><a href="#label" class="headerlink" title="label"></a>label</h3><h3 id="service"><a href="#service" class="headerlink" title="service"></a>service</h3><p>kubectl expose depoyment web –port&#x3D;80 –target-port&#x3D;80 –dry-run&#x3D;client -o yaml</p>
+<ul>
+<li><p>创建基础yaml文件<br>kubectl create deployment nginx –image&#x3D;nginx:1.16 -oyaml –dry-run&#x3D;client &gt; deploy.yaml<br>kubectl expose deployment nginx –port&#x3D;80 –type&#x3D;NodePort -oyaml –dry-run &gt; svc.yaml</p>
+</li>
+<li><p>创建deployment<br>kubectl create deployment java-demo –image&#x3D;xx&#x2F;java-demo –namespace&#x3D;default –dry-run -oyaml &gt; deployment.yaml</p>
+</li>
+<li><p>创建servicee<br>kubectl expose deployment java-demo –port&#x3D;80 –target-port&#x3D;8080 –type&#x3D;NodePort -o yaml –dry-run&#x3D;client &gt; service.yaml</p>
+</li>
+</ul>
+<p>kubectl get po<br>kubectl get svc<br>kubectl get deploy</p>
+<p>kubectl apply -f xxx.yaml</p>
+<h2 id="使用deployment部署无状态应用"><a href="#使用deployment部署无状态应用" class="headerlink" title="使用deployment部署无状态应用"></a>使用deployment部署无状态应用</h2><p>kubectl create deployment web –image&#x3D;nginx:1.14<br>kubectl get deploy,pods</p>
+<h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><p>kubectl set image deployment&#x2F;web nginx&#x3D;nginx:1.15<br>kubectl rollout status deployment&#x2F;nginx-deployment</p>
+<h3 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h3><p>kubectl rollout history deployment&#x2F;web<br>kubectl rollout undo deployment&#x2F;web<br>kubectl rollout undo deployment&#x2F;web –revision&#x3D;2</p>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>kubectl delete deploy&#x2F;web<br>kubectl delete svc&#x2F;web</p>
+<h2 id="edit"><a href="#edit" class="headerlink" title="edit"></a>edit</h2><p>kubectl edit deployment&#x2F;web<br>kubectl edit svc&#x2F;web</p>
+<p>service &gt; deployment &gt; </p>
+<h2 id="pod-1"><a href="#pod-1" class="headerlink" title="pod"></a>pod</h2><p>kubectl describe pod XXX -n kube-system<br>kubectl logs pod_name -c container-name       查看pod日志<br>kubectl delete deployment xxxx                删除应用</p>
+<p>kubectl scale deploy spark-worker-deployment –replicas&#x3D;8       扩容</p>
+<p>kkubectl delete pod -l app&#x3D;flannel            根据label删除pod</p>
+<h2 id="How-to-make-a-k8s-docker"><a href="#How-to-make-a-k8s-docker" class="headerlink" title="How to make a k8s docker"></a>How to make a k8s docker</h2><p>docker inspect image-name:tag</p>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/arvinhuang/p/16838874.html">https://www.cnblogs.com/arvinhuang/p/16838874.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41761624/article/details/108262772">https://blog.csdn.net/weixin_41761624/article/details/108262772</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/691997">https://developer.aliyun.com/article/691997</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huangbaokang/article/details/109675795">https://blog.csdn.net/huangbaokang/article/details/109675795</a> 生成yaml配置文件</li>
+<li><a target="_blank" rel="noopener" href="http://www.sunrisenan.com/docs/boge/boge-1d5f9ck385qm3">http://www.sunrisenan.com/docs/boge/boge-1d5f9ck385qm3</a></li>
+<li><a target="_blank" rel="noopener" href="http://docs.kubernetes.org.cn/564.html">http://docs.kubernetes.org.cn/564.html</a> 命令行创建服务</li>
+</ul>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ul>
+<li>如何制作k8s镜像</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/20/13-xposed-101/" rel="prev" title="13-xposed-101">
+      <i class="fa fa-chevron-left"></i> 13-xposed-101
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/07/27/13-android-101/" rel="next" title="13-android-101">
+      13-android-101 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k8s%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">k8s基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">概念与定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pod"><span class="nav-number">1.2.1.</span> <span class="nav-text">pod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deployment"><span class="nav-number">1.2.2.</span> <span class="nav-text">deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#label"><span class="nav-number">1.2.3.</span> <span class="nav-text">label</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#service"><span class="nav-number">1.2.4.</span> <span class="nav-text">service</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8deployment%E9%83%A8%E7%BD%B2%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">使用deployment部署无状态应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7"><span class="nav-number">1.3.1.</span> <span class="nav-text">升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BB%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">回滚</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-number">1.4.</span> <span class="nav-text">delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#edit"><span class="nav-number">1.5.</span> <span class="nav-text">edit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pod-1"><span class="nav-number">1.6.</span> <span class="nav-text">pod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-make-a-k8s-docker"><span class="nav-number">1.7.</span> <span class="nav-text">How to make a k8s docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">1.8.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO"><span class="nav-number">1.9.</span> <span class="nav-text">TODO</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
